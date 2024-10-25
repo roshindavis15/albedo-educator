@@ -1,0 +1,26 @@
+import { body } from 'express-validator';
+
+export const validateMentor = [
+    body('photo').notEmpty().withMessage('Photo URL is required'),
+    body('name').notEmpty().withMessage('Name is required'),
+    body('empId').notEmpty().withMessage('Employee ID is required'),
+    body('email').isEmail().withMessage('Invalid email format'),
+    body('phoneNumber').notEmpty().withMessage('Phone number is required'),
+    body('dateOfBirth').notEmpty().isDate().withMessage('Invalid date of birth'),
+    body('qualification').notEmpty().withMessage('Qualification is required'),
+    body('place').notEmpty().withMessage('Place is required'),
+    body('pincode').notEmpty().withMessage('Pincode is required'),
+    body('address').notEmpty().withMessage('Address is required'),
+    body('timezone').notEmpty().withMessage('Timezone is required'),
+    body('preferredLanguage').notEmpty().withMessage('Preferred language is required'),
+    body('upiId').notEmpty().withMessage('UPI ID is required'),
+    body('accountNumber').notEmpty().withMessage('Account number is required'),
+    body('accountHolderName').notEmpty().withMessage('Account holder name is required'),
+    body('accountType').notEmpty().withMessage('Account type is required'),
+    body('ifscCode').notEmpty().withMessage('IFSC code is required'),
+    body('bankName').notEmpty().withMessage('Bank name is required'),
+    body('previousCompanies').isArray().withMessage('Previous companies must be an array'),
+    body('previousCompanies.*.companyName').optional().isString().withMessage('Company name must be a string'),
+    body('previousCompanies.*.years').optional().isInt({ min: 0 }).withMessage('Years must be a non-negative integer'),
+    body('previousCompanies.*.months').optional().isInt({ min: 0, max: 11 }).withMessage('Months must be between 0 and 11'),
+];

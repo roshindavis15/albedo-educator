@@ -1,4 +1,4 @@
-import { body, validationResult } from 'express-validator';
+import { body} from 'express-validator';
 
 export const validateTeacher = [
     body('name').notEmpty().withMessage('Name is required.'),
@@ -22,5 +22,5 @@ export const validateTeacher = [
     body('accountType').notEmpty().withMessage('Account type is required.'),
     body('ifscCode').notEmpty().withMessage('IFSC code is required.'),
     body('bankName').notEmpty().withMessage('Bank name is required.'),
-    // Add more validations as needed
+   
 ];
