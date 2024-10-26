@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import { addStudent } from '../services/studentService.js';
 import db from '../models/index.js';
 const { Student } = db;

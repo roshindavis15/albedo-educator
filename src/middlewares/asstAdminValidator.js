@@ -1,0 +1,25 @@
+import { body } from 'express-validator';
+
+export const validateAssistantAdmin = [
+    body('photo').notEmpty().withMessage('Photo is required.'),
+    body('name').notEmpty().withMessage('Name is required.'),
+    body('empId').notEmpty().withMessage('Employee ID is required.'),
+    body('email').isEmail().withMessage('Valid email is required.'),
+    body('phoneNumber').notEmpty().withMessage('Phone number is required.'),
+    body('whatsappNumber').optional().isString(),
+    body('dateOfBirth').isDate().withMessage('Date of birth is required.'),
+    body('qualification').notEmpty().withMessage('Qualification is required.'),
+    body('place').notEmpty().withMessage('Place is required.'),
+    body('pincode').notEmpty().withMessage('Pincode is required.'),
+    body('address').notEmpty().withMessage('Address is required.'),
+    body('timezone').notEmpty().withMessage('Timezone is required.'),
+    body('previousCompanies').optional().isArray(),
+    body('preferredLanguage').notEmpty().withMessage('Preferred language is required.'),
+    body('resumeLink').optional().isURL().withMessage('Resume link must be a valid URL.'),
+    body('upiId').optional().isString(),
+    body('accountNumber').optional().isString(),
+    body('accountHolderName').optional().isString(),
+    body('accountType').optional().isString(),
+    body('ifscCode').optional().isString(),
+    body('bankName').optional().isString(),
+];

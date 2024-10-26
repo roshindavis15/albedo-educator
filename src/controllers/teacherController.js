@@ -1,5 +1,5 @@
 import { addTeacher } from '../services/teacherService.js';
-
+import { validationResult } from 'express-validator';
 
 //adding teacher
 export const createTeacher = async (req, res, next) => {

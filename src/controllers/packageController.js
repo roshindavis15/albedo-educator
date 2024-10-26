@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import db from '../models/index.js';
 const {Package}=db;
 import { addPackage } from '../services/packageService.js';
