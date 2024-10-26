@@ -1,4 +1,4 @@
-import { addTeacher } from '../services/teacherService.js';
+import { addTeacher, updateTeacher } from '../services/teacherService.js';
 import { validationResult } from 'express-validator';
 
 //adding teacher
@@ -13,6 +13,27 @@ export const createTeacher = async (req, res, next) => {
         res.status(201).json(newTeacher);
     } catch (error) {
         next(error); 
+    }
+};
+
+//editing teacher
+
+export const editTeacher = async (req, res, next) => {
+    try {
+        const teacherId = req.params.teacherId;
+        const updateData = req.body; 
+
+       
+        const updatedTeacher = await updateTeacher(teacherId, updateData);
+
+        res.status(200).json({
+            success: true,
+            message: 'Teacher updated successfully',
+            data: updatedTeacher
+        });
+    } catch (error) {
+        
+        next(error);
     }
 };
 

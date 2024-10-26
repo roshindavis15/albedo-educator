@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import { addStudent } from '../services/studentService.js';
+import { addStudent, updateStudent } from '../services/studentService.js';
 import db from '../models/index.js';
 const { Student } = db;
 
@@ -29,3 +29,22 @@ export const getAllStudents=async(req,res,next)=>{
         next(error);
     }
 }
+
+//editing student
+
+export const editStudent=async(req,res,next)=>{
+    try {
+        const studentId=req.params.studentId;
+        const updateData=req.body;
+
+        const updatedStudent=await updateStudent(studentId,updateData);
+
+        res.status(200).json({
+            success:true,
+            message:'student updated successfully',
+            data:updatedStudent
+        })
+    } catch (error) {
+        next(error);
+    }
+};

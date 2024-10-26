@@ -1,7 +1,12 @@
 import { DataTypes } from 'sequelize';
-
+import { v4 as uuidv4 } from 'uuid';
 export default (sequelize) => {
     const Teacher = sequelize.define('Teacher', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4, // Generate a new UUID
+            primaryKey: true,
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,

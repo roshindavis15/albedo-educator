@@ -1,44 +1,47 @@
 import { body } from 'express-validator';
 
 export const validateStudent = [
+    body('registrationFee')
+    .optional()
+    .isBoolean().withMessage('Registration fee must be true or false.'),
     body('photo')
-        .notEmpty().withMessage('Photo URL is required.')
+        .optional()  
         .isURL().withMessage('Photo must be a valid URL.'),
     body('name')
-        .notEmpty().withMessage('Name is required.')
+        .optional()  
         .isString().withMessage('Name must be a string.'),
     body('email')
-        .notEmpty().withMessage('Email is required.')
+        .optional()  
         .isEmail().withMessage('Must be a valid email address.')
         .normalizeEmail(),
     body('phoneNumber')
-        .notEmpty().withMessage('Phone number is required.')
+        .optional()  
         .isString().withMessage('Phone number must be a string.'),
     body('whatsappNumber')
         .optional()
         .isString().withMessage('WhatsApp number must be a string.'),
     body('parentName')
-        .notEmpty().withMessage('Parent name is required.')
+        .optional()  
         .isString().withMessage('Parent name must be a string.'),
     body('parentOccupation')
-        .notEmpty().withMessage('Parent occupation is required.')
+        .optional()  
         .isString().withMessage('Parent occupation must be a string.'),
     body('place')
-        .notEmpty().withMessage('Place is required.')
+        .optional()  
         .isString().withMessage('Place must be a string.'),
     body('pincode')
-        .notEmpty().withMessage('Pincode is required.')
+        .optional()  
         .isPostalCode('IN').withMessage('Pincode must be a valid Indian postal code.'),
     body('address')
-        .notEmpty().withMessage('Address is required.')
+        .optional()  
         .isString().withMessage('Address must be a string.'),
     body('timeZone')
-        .notEmpty().withMessage('Time zone is required.')
+        .optional()  
         .isString().withMessage('Time zone must be a string.'),
     body('selectedMode')
-        .notEmpty().withMessage('Selected mode is required.')
+        .optional()  
         .isString().withMessage('Selected mode must be a string.'),
     body('adviserName')
-        .notEmpty().withMessage('Adviser name is required.')
+        .optional()  
         .isString().withMessage('Adviser name must be a string.'),
 ];
