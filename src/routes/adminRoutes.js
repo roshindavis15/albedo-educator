@@ -1,7 +1,7 @@
 import express from 'express';
 import { validateStudent } from '../middlewares/studentValidator.js';
 import { validatePackage } from '../middlewares/packageValidator.js';
-import { createStudent,editStudent,getAllStudents } from '../controllers/studentController.js';
+import { createStudent,deleteStudent,editStudent,getAllStudents } from '../controllers/studentController.js';
 import { createPackage, getAllPackages } from '../controllers/packageController.js';
 import { validateTeacher } from '../middlewares/teacherValidator.js';
 import { createTeacher, editTeacher } from '../controllers/teacherController.js';
@@ -13,6 +13,7 @@ const adminRoutes = express.Router();
 
 adminRoutes.post('/add-student',validateStudent,createStudent);
 adminRoutes.get('/students', getAllStudents);
+adminRoutes.delete('/delete-student/:studentId',deleteStudent);
 adminRoutes.post('/add-package',validatePackage,createPackage);
 adminRoutes.get('/packages',getAllPackages);
 adminRoutes.post('/add-teacher',validateTeacher,createTeacher);

@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import { addStudent, updateStudent } from '../services/studentService.js';
+import { addStudent, removeStudent, updateStudent } from '../services/studentService.js';
 import db from '../models/index.js';
 const { Student } = db;
 
@@ -43,6 +43,28 @@ export const editStudent=async(req,res,next)=>{
             success:true,
             message:'student updated successfully',
             data:updatedStudent
+        })
+    } catch (error) {
+        next(error);
+    }
+};
+
+//deleting student  
+
+export const deleteStudent=async(req,res,next)=>{
+    try {
+        const studentId=req.params.studentId;
+        const deleted=await removeStudent(studentId);
+        if(!deleted){
+            return res.status(404).json({
+                success:false,
+                message:'student not found'
+            });
+
+        }
+        res.status(200).json({
+            success:true,
+            message:'Student deleted successfully'
         })
     } catch (error) {
         next(error);
