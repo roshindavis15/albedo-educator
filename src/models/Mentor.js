@@ -2,6 +2,11 @@ import { DataTypes } from 'sequelize';
 
 export default (sequelize) => {
     const Mentor = sequelize.define('Mentor', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4, 
+            primaryKey: true,
+        },
         photo: {
             type: DataTypes.STRING,
             allowNull: false,

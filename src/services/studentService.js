@@ -20,7 +20,7 @@ export const updateStudent=async(studentId,updateData)=>{
 
         const updatedStudent=await Student.findOne({where:{id:studentId}});
 
-        return updatedStudent
+        return updatedStudent;
     } catch (error) {
         throw error
     }
