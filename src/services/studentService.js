@@ -25,3 +25,15 @@ export const updateStudent=async(studentId,updateData)=>{
         throw error
     }
 }
+
+
+export const removeStudent=async(studentId)=>{
+ try {
+    const deletedCount=await Student.destroy({
+        where:{id:studentId}
+    });
+    return deletedCount>0;
+ } catch (error) {
+    throw error;
+ }
+};
