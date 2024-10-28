@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import { addMentor } from "../services/mentorService.js";
+import { addMentor, updateMentor } from "../services/mentorService.js";
 
 
 export const createMentor = async (req, res, next) => {
@@ -16,3 +16,19 @@ export const createMentor = async (req, res, next) => {
     }
 };
 
+
+export const editMentor=async(req,res,next)=>{
+    try {
+        const mentorId=req.params.mentorId;
+        const updateData=req.body;
+
+        const updatedMentor=await updateMentor(mentorId,updateData);
+        res.status(200).json({
+            success:true,
+            message:'Mentor updated Successfully',
+            data:updatedMentor
+        })
+    } catch (error) {
+        next(error);
+    }
+};

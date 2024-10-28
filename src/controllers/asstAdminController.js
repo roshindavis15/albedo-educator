@@ -1,5 +1,5 @@
 
-import { addAssistantAdmin } from '../services/asstAdminService.js';
+import { addAssistantAdmin, updateAsstAdmin } from '../services/asstAdminService.js';
 import { validationResult } from 'express-validator';
 
 export const createAssistantAdmin = async (req, res, next) => {
@@ -15,3 +15,23 @@ export const createAssistantAdmin = async (req, res, next) => {
         next(error);
     }
 };
+
+//editing asst-admin
+
+export const editAssistantAdmin=async(req,res,next)=>{
+    try {
+        const asstAdminId=req.params.asstAdminId;
+        const updateData=req.body;
+
+        const updatedAsstAdmin=await updateAsstAdmin(asstAdminId,updateData);
+
+        res.status(200).json({
+            success:true,
+            message:'Asst Admin updated Successfully',
+            data:updatedAsstAdmin
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
