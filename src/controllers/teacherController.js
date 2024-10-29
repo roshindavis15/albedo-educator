@@ -1,4 +1,6 @@
-import { addTeacher, updateTeacher } from '../services/teacherService.js';
+import { addTeacher, assignStudentsToTeacher, removeTeacher, updateTeacher } from '../services/teacherService.js';
+import db from '../models/index.js'; 
+const {Teacher}=db;
 import { validationResult } from 'express-validator';
 
 //adding teacher
@@ -58,3 +60,20 @@ export const deleteTeacher=async(req,res,next)=>{
     }
 };
 
+
+//assigning students 
+
+export const assignStudents=async(req,res,next)=>{
+    try {
+        const teacherId=req.params.teacherId;
+        const {studentIds}=req.body;
+        const result=await assignStudentsToTeacher(teacherId,studentIds);
+        res.status(200).json({
+            success:true,
+            message:'assigned students to teacher successfully',
+            data:result
+        })
+    } catch (error) {
+        next(error);
+    }
+};
