@@ -69,5 +69,15 @@ export default (sequelize) => {
         timestamps: true,
     });
 
+    Student.associate=(models)=>{
+        Student.belongsToMany(models.Teacher,{
+            through:'TeacherStudent',
+            as:'teachers',
+            foreignKey:'studentId',
+            otherKey:'teacherId'
+
+        });
+    };
+
     return Student;
 };

@@ -35,3 +35,18 @@ export const editAssistantAdmin=async(req,res,next)=>{
     }
 };
 
+
+export const deleteAssistantAdmin=async(req,res,next)=>{
+    try {
+        const asstAdminId=req.params.asstAdminId;
+        const deleted=await removeAsstAdmin(asstAdminId);
+        if(!deleted){
+            return res.status(404).json({
+                success:false,
+                message:'Asst Admin not found',
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
