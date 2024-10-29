@@ -1,5 +1,8 @@
+import { Sequelize } from "sequelize";
 import db from "../models/index.js";
 const {Teacher}=db;
+const {Student}=db;
+const {TeacherStudent}=db;
 
 //adding teacher
 export const addTeacher=async(teacherData)=>{
@@ -30,21 +33,42 @@ export const updateTeacher = async (teacherId, updateData) => {
 
 //deleting teacher
 
-export const deleteTeacher=async(req,res,next)=>{
+export const removeTeacher=async(teacherId)=>{
     try {
-        const teacherId=req.params.teacherId;
-        const deleted=await removeTeacher(teacherId);
-        if(!deleted){
-            return res.status(404).json({
-                success:false,
-                message:'teachers not found'
-            })
-        }
-        res.status(200).json({
-            success:true,
-            message:'Teacher deleted successfully'
-        })
+         const deletedCount=await Teacher.destroy({
+            where:{id:teacherId}
+         });
+         return deletedCount>0;
     } catch (error) {
-       next(error);
+      throw error;
+    }
+};
+
+
+export const assignStudentsToTeacher=async(teacherId,studentIds)=>{
+    try {
+        console.log("here")
+        console.log("teacherId:",teacherId)
+        console.log("studentIds:",studentIds);
+        const teacher=await Teacher.findByPk(teacherId);
+        console.log("teacher:",teacher)
+        if (!teacher) throw new Error('Teacher not found');
+
+        const students = await Student.findAll({ where: { id: studentIds } });
+        if (students.length !== studentIds.length) throw new Error('Some students not found');
+         console.log("students:",students);
+         
+
+         await Promise.all(studentIds.map(async (studentId) => {
+            await TeacherStudent.create({
+                teacherId: teacherId,
+                studentId: studentId
+            });
+        }));
+
+        return { success: true, message: 'Students assigned to teacher successfully' };
+
+    } catch (error) {
+        throw new Error(`Failed to assign students:${error.message}`);
     }
 };

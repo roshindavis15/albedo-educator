@@ -21,3 +21,14 @@ export const updateMentor=async(mentorId,updateData)=>{
         throw error
     }
 }
+
+export const removeMentor=async(mentorId)=>{
+    try {
+        const deletedCount=await Mentor.destroy({
+            where:{id:mentorId}
+        });
+        return deletedCount>0;
+    } catch (error) {
+        throw error;
+    }
+}
