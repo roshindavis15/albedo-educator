@@ -6,7 +6,7 @@ import { createPackage, getAllPackages } from '../controllers/packageController.
 import { validateTeacher } from '../middlewares/teacherValidator.js';
 import { createTeacher, editTeacher,deleteTeacher } from '../controllers/teacherController.js';
 import { validateMentor } from '../middlewares/mentorValidator.js';
-import { createMentor,editMentor } from '../controllers/mentorController.js';
+import { createMentor,editMentor,deleteMentor } from '../controllers/mentorController.js';
 import { validateAssistantAdmin } from '../middlewares/asstAdminValidator.js';
 import { createAssistantAdmin,editAssistantAdmin } from '../controllers/asstAdminController.js';
 const adminRoutes = express.Router();
@@ -24,7 +24,7 @@ adminRoutes.post('/add-mentor',validateMentor,createMentor);
 adminRoutes.post('/add-asst-admin',validateAssistantAdmin,createAssistantAdmin);
 adminRoutes.put('/edit-asst-admin/:asstAdminId',validateAssistantAdmin,editAssistantAdmin);
 adminRoutes.put('/edit-mentor/:mentorId',validateMentor,editMentor);
-
+adminRoutes.delete('/delete-mentor/:mentorId',deleteMentor);
 
 
 export default adminRoutes;
