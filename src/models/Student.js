@@ -75,7 +75,15 @@ export default (sequelize) => {
             foreignKey: 'studentId',
             otherKey: 'teacherId'
         });
-    };
+        
+        Student.belongsToMany(models.Mentor, {
+            through: models.MentorStudent,
+            foreignKey: 'studentId',
+            otherKey: 'mentorId'
+        });
+    }
+   
+    
 
     return Student;
 };
