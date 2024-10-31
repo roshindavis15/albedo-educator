@@ -1,19 +1,18 @@
 import express from 'express';
 import { validateStudent } from '../middlewares/studentValidator.js';
 import { validatePackage } from '../middlewares/packageValidator.js';
-import { createStudent,deleteStudent,editStudent,getAllStudents } from '../controllers/studentController.js';
+import { createStudent,deleteStudent,editStudent, getStudentsData } from '../controllers/studentController.js';
 import { createPackage, getAllPackages } from '../controllers/packageController.js';
 import { validateTeacher } from '../middlewares/teacherValidator.js';
-import { createTeacher, editTeacher,deleteTeacher, assignStudents } from '../controllers/teacherController.js';
+import { createTeacher, editTeacher,deleteTeacher, assignStudentsToTeacher } from '../controllers/teacherController.js';
 import { validateMentor } from '../middlewares/mentorValidator.js';
-import { createMentor,editMentor,deleteMentor } from '../controllers/mentorController.js';
+import { createMentor,editMentor,deleteMentor,assignStudentsToMentor } from '../controllers/mentorController.js';
 import { validateAssistantAdmin } from '../middlewares/asstAdminValidator.js';
 import { createAssistantAdmin,editAssistantAdmin,deleteAssistantAdmin } from '../controllers/asstAdminController.js';
-import { assignStudentsToTeacher } from '../services/teacherService.js';
+
 const adminRoutes = express.Router();
 
 adminRoutes.post('/add-student',validateStudent,createStudent);
-adminRoutes.get('/students', getAllStudents);
 adminRoutes.put('/edit-student/:studentId',validateStudent,editStudent);
 adminRoutes.delete('/delete-student/:studentId',deleteStudent);
 adminRoutes.post('/add-teacher',validateTeacher,createTeacher);
@@ -27,7 +26,9 @@ adminRoutes.put('/edit-asst-admin/:asstAdminId',validateAssistantAdmin,editAssis
 adminRoutes.put('/edit-mentor/:mentorId',validateMentor,editMentor);
 adminRoutes.delete('/delete-mentor/:mentorId',deleteMentor);
 adminRoutes.delete('/delete-asst-admin/:asstAdminId',deleteAssistantAdmin);
-adminRoutes.post('/assign-students/:teacherId',assignStudents);
-
+adminRoutes.post('/assign-students-teacher/:teacherId',assignStudentsToTeacher);
+adminRoutes.post('/assign-students-mentor/:mentorId',assignStudentsToMentor);
+adminRoutes.get('/get-students',getStudentsData);
+// adminRoutes.get('/get-teachers',getTeachersData);
 
 export default adminRoutes;
