@@ -1,5 +1,5 @@
 import { validationResult } from 'express-validator';
-import { addStudent, removeStudent, updateStudent } from '../services/studentService.js';
+import { addStudent, getStudentsDataFunc, removeStudent, updateStudent } from '../services/studentService.js';
 import db from '../models/index.js';
 const { Student } = db;
 
@@ -17,18 +17,6 @@ export const createStudent = async (req, res, next) => {
         res.status(201).json(newStudent);
     } catch (error) {
         next(error); 
-    }
-}
-
-
-//get all students
-export const getAllStudents=async(req,res,next)=>{
-    try {
-        const students=await Student.findAll();
-        console.log("students:",students);
-        res.status(200).json(students);
-    } catch (error) {
-        next(error);
     }
 }
 
@@ -72,3 +60,18 @@ export const deleteStudent=async(req,res,next)=>{
         next(error);
     }
 };
+
+//get students
+
+export const getStudentsData=async(req,res,next)=>{
+    try {
+        const studentsData=await getStudentsDataFunc();
+        res.status(200).json({
+            success:true,
+            msg:'students data fetched successfully',
+            data:studentsData
+        })
+    } catch (error) {
+        next(error);
+    }
+}

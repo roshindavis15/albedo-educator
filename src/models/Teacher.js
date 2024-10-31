@@ -100,7 +100,8 @@ export default (sequelize) => {
         Teacher.belongsToMany(models.Student, {
             through: models.TeacherStudent,
             foreignKey: 'teacherId',
-            otherKey: 'studentId'
+            otherKey: 'studentId',
+            as:'students'
         });
     };
 

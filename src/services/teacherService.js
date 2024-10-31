@@ -1,4 +1,3 @@
-import { Sequelize } from "sequelize";
 import db from "../models/index.js";
 const {Teacher}=db;
 const {Student}=db;
@@ -45,7 +44,7 @@ export const removeTeacher=async(teacherId)=>{
 };
 
 
-export const assignStudentsToTeacher=async(teacherId,studentIds)=>{
+export const assignStudentsToTeacherFunc=async(teacherId,studentIds)=>{
     try {
         console.log("here")
         console.log("teacherId:",teacherId)
@@ -72,3 +71,14 @@ export const assignStudentsToTeacher=async(teacherId,studentIds)=>{
         throw new Error(`Failed to assign students:${error.message}`);
     }
 };
+
+
+export const getTeachersDataFunc=async()=>{
+    try {
+        const teachersData=await Teacher.findAll({
+            attributes:['id','name','email','phoneNumber','qualification','']
+        })
+    } catch (error) {
+        
+    }
+}

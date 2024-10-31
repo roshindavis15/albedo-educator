@@ -1,6 +1,4 @@
-import { addTeacher, assignStudentsToTeacher, removeTeacher, updateTeacher } from '../services/teacherService.js';
-import db from '../models/index.js'; 
-const {Teacher}=db;
+import { addTeacher, assignStudentsToTeacherFunc, removeTeacher, updateTeacher } from '../services/teacherService.js';
 import { validationResult } from 'express-validator';
 
 //adding teacher
@@ -63,11 +61,11 @@ export const deleteTeacher=async(req,res,next)=>{
 
 //assigning students 
 
-export const assignStudents=async(req,res,next)=>{
+export const assignStudentsToTeacher=async(req,res,next)=>{
     try {
         const teacherId=req.params.teacherId;
         const {studentIds}=req.body;
-        const result=await assignStudentsToTeacher(teacherId,studentIds);
+        const result=await assignStudentsToTeacherFunc(teacherId,studentIds);
         res.status(200).json({
             success:true,
             message:'assigned students to teacher successfully',
@@ -77,3 +75,19 @@ export const assignStudents=async(req,res,next)=>{
         next(error);
     }
 };
+
+//get teachers
+
+export const getTeachersData=async(req,res,next)=>{
+    try {
+        const teachersData=await getTeachersDataFunc();
+        res.status(200).json({
+            success:true,
+            msg:'teachers data fetched successfully',
+            data:teachersData
+        })
+    } catch (error) {
+        
+    }
+   
+}

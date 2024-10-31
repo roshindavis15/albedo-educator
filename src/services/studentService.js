@@ -1,7 +1,7 @@
-
 import db from '../models/index.js'; 
 const { Student } = db;
-
+const {Teacher}=db;
+const {Mentor}=db;
 
 
 export const addStudent = async (studentData) => {
@@ -37,3 +37,29 @@ export const removeStudent=async(studentId)=>{
     throw error;
  }
 };
+
+export const getStudentsDataFunc=async()=>{
+    try {
+        const studentsData=await Student.findAll({
+            attributes:['id','name','email','phoneNumber','whatsappNumber','parentName','parentOccupation'],
+            include:[
+                {
+                    model:Teacher,
+                    as:'teachers',
+                    attributes:['name'],
+                    through:{attributes:[]}
+                },
+                {
+                    model:Mentor,
+                    as:'mentors',
+                    attributes:['name'],
+                    through:{attributes:[]}
+                }
+
+            ]
+        });
+        return studentsData
+    } catch (error) {
+        throw error;
+    }
+}

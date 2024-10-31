@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator";
-import { addMentor, removeMentor, updateMentor } from "../services/mentorService.js";
+import { addMentor, removeMentor, updateMentor,assignStudentsToMentorFunc } from "../services/mentorService.js";
 
 
 export const createMentor = async (req, res, next) => {
@@ -47,6 +47,23 @@ export const deleteMentor=async(req,res,next)=>{
         res.status(200).json({
             success:true,
             message:'Mentor deleted successfully'
+        })
+    } catch (error) {
+        next(error);
+    }
+};
+
+//assigning students
+
+export const assignStudentsToMentor=async(req,res,next)=>{
+    try {
+        const mentorId=req.params.mentorId;
+        const {studentIds}=req.body;
+        const result=await assignStudentsToMentorFunc(mentorId,studentIds);
+        res.status(200).json({
+            success:true,
+            message:'assigned students to teacher successfully',
+            data:result
         })
     } catch (error) {
         next(error);
