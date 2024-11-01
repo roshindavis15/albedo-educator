@@ -76,9 +76,9 @@ export const assignStudentsToTeacherFunc=async(teacherId,studentIds)=>{
 export const getTeachersDataFunc=async()=>{
     try {
         const teachersData=await Teacher.findAll({
-            attributes:['id','name','email','phoneNumber','qualification','']
+            attributes:['id','name','email','photo','phoneNumber','whatsappNumber','qualification','place','upiId','ifscCode','dateOfBirth','accountNumber','bankName',]
         })
     } catch (error) {
-        
+        next(error);
     }
 }

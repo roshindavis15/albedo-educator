@@ -4,7 +4,7 @@ import { validatePackage } from '../middlewares/packageValidator.js';
 import { createStudent,deleteStudent,editStudent, getStudentsData } from '../controllers/studentController.js';
 import { createPackage, getAllPackages } from '../controllers/packageController.js';
 import { validateTeacher } from '../middlewares/teacherValidator.js';
-import { createTeacher, editTeacher,deleteTeacher, assignStudentsToTeacher } from '../controllers/teacherController.js';
+import { createTeacher, editTeacher,deleteTeacher, assignStudentsToTeacher, getTeachersData } from '../controllers/teacherController.js';
 import { validateMentor } from '../middlewares/mentorValidator.js';
 import { createMentor,editMentor,deleteMentor,assignStudentsToMentor } from '../controllers/mentorController.js';
 import { validateAssistantAdmin } from '../middlewares/asstAdminValidator.js';
@@ -29,6 +29,6 @@ adminRoutes.delete('/delete-asst-admin/:asstAdminId',deleteAssistantAdmin);
 adminRoutes.post('/assign-students-teacher/:teacherId',assignStudentsToTeacher);
 adminRoutes.post('/assign-students-mentor/:mentorId',assignStudentsToMentor);
 adminRoutes.get('/get-students',getStudentsData);
-// adminRoutes.get('/get-teachers',getTeachersData);
+adminRoutes.get('/get-teachers',getTeachersData);
 
 export default adminRoutes;
