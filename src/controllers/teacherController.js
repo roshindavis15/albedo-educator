@@ -1,4 +1,4 @@
-import { addTeacher, assignStudentsToTeacherFunc, removeTeacher, updateTeacher } from '../services/teacherService.js';
+import { addTeacher, assignStudentsToTeacherFunc, getTeachersDataFunc, removeTeacher, updateTeacher } from '../services/teacherService.js';
 import { validationResult } from 'express-validator';
 
 //adding teacher
@@ -87,7 +87,7 @@ export const getTeachersData=async(req,res,next)=>{
             data:teachersData
         })
     } catch (error) {
-        
+         next(error)   
     }
    
 }
